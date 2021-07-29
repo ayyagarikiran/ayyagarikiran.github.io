@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
-<body onload="load1(); load2(); load3();">
+<body onload="load1(); load2();">
     <h1 id="intro">Vaccine Administered in Various States of USA</h1>
     <div>
         <span class="italic">By Sivakiran Ayyagari - July 2021</span>
@@ -18,25 +18,21 @@
         </h3>
         <ul>
             <li>
-                <a href="#one" class="contents">Which car brands will get you good mileage?</a>
+                <a href="#one" class="contents">Vaccinations with at least one dose</a>
             </li>
             <li>
-                <a href="#two" class="contents">Do Engine Cylinders Affect Mileage?</a>
+                <a href="#two" class="contents">Fully Vaccinated population</a>
             </li>
             <li>
-                <a href="#three" class="contents">What is the relationship between fuel type, number of engine cylinders and the mileage?</a>
+                <a href="#three" class="contents">Statistics about Type of Vaccines used and administration among various age groups</a>
             </li>
         </ul>
         <hr>
 
     </div>
     <a href="#two" class="back">Next</a>
-    <h2 id="one">Which car brands will get you good mileage?</h2>
-    <p>See how the highway and city mileages compare for major car brands. Click on the buttons to explore each category. </p>
-    <div>
-        <button id="highway" onclick="change('AverageHighwayMPG')">Average Highway MPG</button>
-        <button id="city" onclick="change('AverageCityMPG')">Average City MPG</button>
-    </div>
+    <h2 id="one">Vaccination per hundred People with at least one dose</h2>
+    <p>This bar chart depicts how states have innoculated the population with at least one dose of Vaccination. Hovering over the bars would give any state's Vaccination per Hundred people</p>
     <svg id="scene1" width=1050 height=1100>
     </svg>
 
@@ -45,22 +41,73 @@
     <a href="#one" class="back">Previous</a>
     <a href="#three" class="back">Next</a>
 
-    <h2 id="two">Do Engine Cylinders Affect Mileage?</h2>
-    <p>Hover over each engine cylinder category in the legend to better understand the trend. Additionally, hovering over each
-        data point itself will indicate which make of the car you are hovering over via an interactive tooltip.
+    <h2 id="two">Fully Vaccinated population</h2>
+    <p>This bar chart depicts how states have innoculated the population with both the doses. Hovering over the bars would give any state's Vaccination per Hundred people
     </p>
-    <svg id="scene2" width=1050 height=400></svg>
+    <svg id="scene2" width=1050 height=1100></svg>
     <hr>
 
     <a href="#intro" class="back">Back to Top</a>
     <a href="#two" class="back">Previous</a>
-    <h2 id="three">What is the relationship between fuel type, number of engine cylinders and the mileage?</h2>
-    <p>This visualization shows us the relationship between all three fields: fuel type, engine cylinder, and average MPG. The size of the 
-        plotted point indicates the mileage, while the density represents the relative value of the cars that fall into that configuration of fuel type and
-        cylinder number.
+    <h2 id="three">Statistics about Type of Vaccines used and administration among various age groups </h2>
+    <p>dfsg
         </p>
-    <svg id="scene3" width=1050 height=1200></svg>
-
+    <div>
+        <button id="United States" onclick="change('United States')">United States</button>
+        <button id="Alabama" onclick="change('Alabama')">Alabama</button>
+        <button id="Alaska" onclick="change('Alaska')">Alaska</button>
+        <button id="American Samoa" onclick="change('American Samoa')">American Samoa</button>
+        <button id="Arizona" onclick="change('Arizona')">Arizona</button>
+        <button id="Arkansas" onclick="change('Arkansas')">Arkansas</button>
+        <button id="California" onclick="change('California')">California</button>
+        <button id="Colorado" onclick="change('Colorado')">Colorado</button>
+        <button id="Connecticut" onclick="change('Connecticut')">Connecticut</button>
+        <button id="Delaware" onclick="change('Delaware')">Delaware</button>
+        <button id="DC" onclick="change('DC')">DC</button>
+        <button id="Florida" onclick="change('Florida')">Florida</button>
+        <button id="Georgia" onclick="change('Georgia')">Georgia</button>
+        <button id="Hawaii" onclick="change('Hawaii')">Hawaii</button>
+        <button id="Idaho" onclick="change('Idaho')">Idaho</button>
+        <button id="Illinois" onclick="change('Illinois')">Illinois</button>
+        <button id="Indiana" onclick="change('Indiana')">Indiana</button>
+        <button id="Iowa" onclick="change('Iowa')">Iowa</button>
+        <button id="Kansas" onclick="change('Kansas')">Kansas</button>
+        <button id="Kentucky" onclick="change('Kentucky')">Kentucky</button>
+        <button id="Louisiana" onclick="change('Louisiana')">Louisiana</button>
+        <button id="Maine" onclick="change('Maine')">Maine</button>
+        <button id="Maryland" onclick="change('Maryland')">Maryland</button>
+        <button id="Massachusetts" onclick="change('Massachusetts')">Massachusetts</button>
+        <button id="Michigan" onclick="change('Michigan')">Michigan</button>
+        <button id="Mississippi" onclick="change('Mississippi')">Mississippi</button>
+        <button id="Missouri" onclick="change('Missouri')">Missouri</button>
+        <button id="Montana" onclick="change('Montana')">Montana</button>
+        <button id="Nebraska" onclick="change('Nebraska')">Nebraska</button>
+        <button id="Nevada" onclick="change('Nevada')">Nevada</button>
+        <button id="New Hampshire" onclick="change('New Hampshire')">New Hampshire</button>
+        <button id="New Jersey" onclick="change('New Jersey')">New Jersey</button>
+        <button id="New Mexico" onclick="change('New Mexico')">New Mexico</button>
+        <button id="New York" onclick="change('New York')">New York State</button>
+        <button id="North Carolina" onclick="change('North Carolina')">North Carolina</button>
+        <button id="North Dakota" onclick="change('North Dakota')">North Dakota</button>
+        <button id="Ohio" onclick="change('Ohio')">Ohio</button>
+        <button id="Oklahoma" onclick="change('Oklahoma')">Oklahoma</button>
+        <button id="Oregon" onclick="change('Oregon')">Oregon</button>
+        <button id="Rhode Island" onclick="change('Rhode Island')">Rhode Island</button>
+        <button id="South Dakota" onclick="change('South Dakota')">South Dakota</button>
+        <button id="North Carolina" onclick="change('North Carolina')">North Carolina</button>
+        <button id="Tennessee" onclick="change('Tennessee')">Tennessee</button>
+        <button id="Texas" onclick="change('Texas')">Texas</button>
+        <button id="Utah" onclick="change('Utah')">Utah</button>
+        <button id="Vermont" onclick="change('Vermont')">Vermont</button>
+        <button id="Virginia" onclick="change('Virginia')">Virginia</button>
+        <button id="Washington" onclick="change('Washington')">Washington</button>
+        <button id="West Virginia" onclick="change('West Virginia')">West Virginia</button>
+        <button id="Wisconsin" onclick="change('Wisconsin')">Wisconsin</button>
+        <button id="Wyoming" onclick="change('Wyoming')">Wyoming</button>
+        
+    </div>
+    <svg id="scene3" width=1050 height=600></svg>
+    
     <!-- Script -->
     <script src="vis.js"></script>
 
@@ -68,39 +115,24 @@
     <a href="#intro" class="back">Back to Top</a>
     <h2>About this Visualization</h2>
     <p>
-        This is a narrative visualization created for the CS 498 Data Visualization course. Overview: The above visualization utilizes
-        the slideshow narrative visualization technique, while incorporating hybrid elements of the drill-down technique.
-        Each slide contains guidance on how to interact with the visualization. The structure of the slides guides users
-        from one idea to the next, but there is still room for individual exploration at each stage. We accomplish visual
-        consistency by maintaining uniform elements throughout, introducing a mixture of text, image and chart elements,
-        and having meaningful colors.
+        to do
     </p>
 
     <h3>Scenes</h3>
     <p>
-        The scenes themselves are constructed via HTML id tags. Each scene has a unique id that is linked via the buttons.The “Next/Previous”
-        buttons allow users to navigate from scene to scene independently, but the structure helps guide the overall narrative.
-        Each scene is composed of a unique chart that highlights its own distinct message.
+        to do
     </p>
     <h3>Annotations</h3>
     <p>
-        Annotations remain consistent on the charts, even throughout changes triggered by the interactions. This allows the user
-        to have some grounding on the overall message the visualization is trying to communicate. For example, the annotation
-        about a relatively good gas mileage stays consistent throughout the vis transformation from highway mileage to city
-        mileage. This can help a user better understand which car makes consistently have good mileage across both parameters.
+        to do
     </p>
     <h3>Parameters</h3>
     <p>
-        The visualizations have a handful of relevant parameters that help the user better explore the data. By interacting with
-        JavaScript input features, such as the toggle buttons or the interactive legend in vis2, the user can choose to see
-        data about a specific category, or even filter out the datapoints by hovering over specific engine cylinder categories.
-        The user input is used as a parameter that controls what the visualization portrays.
+        to do
     </p>
     <h3>Triggers</h3>
     <p>
-        The triggers are implemented via events and callbacks, such as “mouseover”, “mouseout” and “click”. When specific html elements
-        experience these events, the callback function is invoked, and we can change the visualization with respect to the
-        action indicated by the trigger. The example triggers we have here are the buttons and hovering legend.
+        to do
     </p>
     <hr>
 
