@@ -1,10 +1,3 @@
-// --------------------------------------------------------------------------------// 
-// D3 Code for CS 498 Final Project - By Amrutha Gujjar
-// --------------------------------------------------------------------------------// 
-
-// --------------------------------------------------------------------------------// 
-// SETUP --------------------------------------------------------------------------//
-// --------------------------------------------------------------------------------// 
 
 // Retrieve the scenes
 var scene1 = d3.select('#scene1')
@@ -26,68 +19,6 @@ var x = d3.scaleBand()
 
 
 
-var y = d3.scaleLinear()
-    .domain([0, 200])
-    .range([height, 0]);
-
-var xAxis = d3.axisBottom()
-    .scale(x)
-    .ticks(5);
-
-var y1 = d3.scaleLinear()
-    .domain([0, 200])
-    .range([height, 0]);
-
-var y2 = d3.scaleLinear()
-    .domain([0, 100])
-    .range([height, 0]);
-
-var yAxis = d3.axisLeft()
-    .scale(y1)
-    .ticks(10);
-
-var y2Axis = d3.axisLeft()
-    .scale(y2)
-    .ticks(10);
-
-// axis appends
-scene1.append("g")
-    .attr("transform", "translate(50,20)")
-    .attr("class", "axis")
-    .call(yAxis);
-
-scene2.append("g")
-    .attr("transform", "translate(50,20)")
-    .attr("class", "axis")
-    .call(y2Axis);
-
-// axis labels
-scene1.append('text')
-    .attr('x', -500)
-    .attr('y', 15)
-    .attr('transform', 'rotate(-90)')
-    .attr('text-anchor', 'middle')
-    .text('Vaccination per Hundred people')
-
-scene1.append('text')
-    .attr('x', 500)
-    .attr('y', 1050)
-    .attr('text-anchor', 'middle')
-    .text('States')
-
-scene2.append('text')
-    .attr('x', -500)
-    .attr('y', 15)
-    .attr('transform', 'rotate(-90)')
-    .attr('text-anchor', 'middle')
-    .text('Vaccination per Hundred people')
-
-scene2.append('text')
-    .attr('x', 500)
-    .attr('y', 1050)
-    .attr('text-anchor', 'middle')
-    .text('States')
-
 
 
 // --------------------------------------------------------------------------------// 
@@ -108,15 +39,56 @@ var bar_tooltip = d3.select("body")
 async function load1() {
     d3.csv("https://raw.githubusercontent.com/ayyagarikiran/ayyagarikiran.github.io/main/VaccineDistribution.csv").then(function (data_given) {
 
+        // constants
+        var width = 900
+        var height = 550
 
-        var xScale = d3.scaleBand().range([0, width]).padding(0.4),
-            yScale = d3.scaleLinear().range([height, 0]);
+        var margin = { top: 10, right: 100, bottom: 50, left: 50 },
+            width = 1000 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
+        var yScene1 = d3.scaleLinear()
+                  .domain([0, 200])
+                  .range([height, 0]);
+
+        var xScale = d3.scaleBand().range([0, width]).padding(0.4);
 
         xScale.domain(data_given.map(function(d) { return d.location; }));
-        yScale.domain([0, d3.max(data_given, function(d) { return d.total_vaccinations_per_hundred; })]);
+
+
+        var xAxis = d3.axisBottom()
+                      .scale(x)
+                      .ticks(5);
+        var yAxis = d3.axisLeft()
+                      .scale(yScene1)
+                      .ticks(10);
+
+
+        // axis appends
+        scene1.append("g")
+              .attr("transform", "translate(50,20)")
+              .attr("class", "axis")
+              .call(yAxis);
+
+        // axis labels
+        scene1.append('text')
+            .attr('x', -350)
+            .attr('y', 15)
+            .attr('transform', 'rotate(-90)')
+            .attr('text-anchor', 'middle')
+            .text('Vaccination per Hundred people')
+
+        scene1.append('text')
+            .attr('x', 500)
+            .attr('y', 630)
+            .attr('text-anchor', 'middle')
+            .text('States')
+
+
+        
 
         scene1.append("g")
-            .attr("transform", "translate(50,950)")
+            .attr("transform", "translate(50,550)")
             .attr("class", "axis")
             .call(d3.axisBottom(xScale))
             .selectAll("text")
@@ -125,14 +97,14 @@ async function load1() {
 
 
         scene1.selectAll("mybar")
-            .attr("transform", "translate(50,950)")
+            .attr("transform", "translate(50,550)")
             .data(data_given)
             .enter()
             .append("rect")
             .attr("x", function (d, i) { return margin.left + xScale(d.location); })
-            .attr("y", function (d, i) { return y(d.total_vaccinations_per_hundred); })
+            .attr("y", function (d, i) { return 10+yScene1(d.total_vaccinations_per_hundred); })
             .attr("width", xScale.bandwidth())
-            .attr("height", function (d, i) { return (height-y(d.total_vaccinations_per_hundred)); })
+            .attr("height", function (d, i) { return (height-yScene1(d.total_vaccinations_per_hundred)); })
             .attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
                 var d = d3.select(this).data()[0]
                 bar_tooltip.transition()
@@ -151,52 +123,6 @@ async function load1() {
     })
 }
 
-// This function is called by the buttons on top of the plot
-function change(setting) {
-    if (setting === "AverageHighwayMPG") {
-        scene1.selectAll("rect")
-            .transition()
-            .duration(2000)
-            .attr("fill", "#5E4FA2")
-            .attr("y", function (d, i) { return y(d.total_vaccinations_per_hundred); })
-            .attr("height", function (d, i) { return height-y(d.total_vaccinations_per_hundred); })
-            .attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
-                var d = d3.select(this).data()[0]
-                bar_tooltip.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                bar_tooltip.html(d.location + ',' + d.total_vaccinations_per_hundred )
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", function (d) {
-                bar_tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
-    } else {
-        scene1.selectAll("rect")
-            .transition()
-            .duration(2000)
-            .attr("fill", "#66C2A5")
-            .attr("y", function (d, i) { return y(d.people_fully_vaccinated_per_hundred); })
-            .attr("height", function (d, i) { return height - y(d.people_fully_vaccinated_per_hundred); })
-            .attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
-                var d = d3.select(this).data()[0]
-                bar_tooltip.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                bar_tooltip.html(d.location + ',' + d.people_fully_vaccinated_per_hundred )
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", function (d) {
-                bar_tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
-    }
-}
 
 // --------------------------------------------------------------------------------// 
 // SCENE TWO ----------------------------------------------------------------------//
@@ -205,14 +131,50 @@ async function load2() {
     d3.csv("https://raw.githubusercontent.com/ayyagarikiran/ayyagarikiran.github.io/main/VaccineDistribution.csv").then(function (data_given) {
 
 
+        var width = 900
+        var height = 550
+
+        var margin = { top: 10, right: 100, bottom: 50, left: 50 },
+            width = 1000 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
+
         var xScale = d3.scaleBand().range([0, width]).padding(0.4),
             yScale = d3.scaleLinear().range([height, 0]);
+
+
+        var yScene2 = d3.scaleLinear()
+                   .domain([0, 100])
+                   .range([height, 0]);
 
         xScale.domain(data_given.map(function(d) { return d.location; }));
         yScale.domain([0, d3.max(data_given, function(d) { return d.people_fully_vaccinated_per_hundred; })]);
 
+
+        var y2Axis = d3.axisLeft()
+                       .scale(yScene2)
+                       .ticks(10);
+
         scene2.append("g")
-            .attr("transform", "translate(50,950)")
+              .attr("transform", "translate(50,20)")
+              .attr("class", "axis")
+              .call(y2Axis);
+
+
+        scene2.append('text')
+            .attr('x', -350)
+            .attr('y', 15)
+            .attr('transform', 'rotate(-90)')
+            .attr('text-anchor', 'middle')
+            .text('Vaccination per Hundred people')
+
+        scene2.append('text')
+            .attr('x', 500)
+            .attr('y', 630)
+            .attr('text-anchor', 'middle')
+            .text('States')
+
+        scene2.append("g")
+            .attr("transform", "translate(50,550)")
             .attr("class", "axis")
             .call(d3.axisBottom(xScale))
             .selectAll("text")
@@ -221,15 +183,15 @@ async function load2() {
 
 
         scene2.selectAll("mybar")
-            .attr("transform", "translate(50,950)")
+            .attr("transform", "translate(50,550)")
             .data(data_given)
             .attr("fill", "#66C2A5")
             .enter()
             .append("rect")
             .attr("x", function (d, i) { return margin.left + xScale(d.location); })
-            .attr("y", function (d, i) { return y2(d.people_fully_vaccinated_per_hundred); })
+            .attr("y", function (d, i) { return 10+yScene2(d.people_fully_vaccinated_per_hundred); })
             .attr("width", xScale.bandwidth())
-            .attr("height", function (d, i) { return (height-y2(d.people_fully_vaccinated_per_hundred)); })
+            .attr("height", function (d, i) { return (height-yScene2(d.people_fully_vaccinated_per_hundred)); })
             .attr("fill", "#5E4FA2").on("mouseover", function (d, i) {
                 var d = d3.select(this).data()[0]
                 bar_tooltip.transition()
@@ -272,8 +234,8 @@ function change(setting) {
     d3.csv(filePath, function(data) {
     var myarray=[];
     myarray.push(parseInt(data.Administered_Janssen));
-    myarray.push(parseInt(data.Administered_Moderna));
     myarray.push(parseInt(data.Administered_Pfizer));
+    myarray.push(parseInt(data.Administered_Moderna));
     console.log(myarray);
 
     var height=500;
