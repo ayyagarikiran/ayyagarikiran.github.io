@@ -356,7 +356,7 @@ function change(setting) {
                 bar_tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                bar_tooltip.html(myarray1[i])
+                bar_tooltip.html(x1[i]+" Age Group "+'\n'+myarray1[i])
                     .style("left", (d3.event.pageX) + "px")
                     .style('font-size', '12px')
                     .style("top", (d3.event.pageY - 28) + "px");
